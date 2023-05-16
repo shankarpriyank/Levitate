@@ -13,8 +13,8 @@ val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    )
+        fontSize = 16.sp,
+    ),
 )
 /* Other default text styles to override
 button = TextStyle(
@@ -30,21 +30,21 @@ caption = TextStyle(
 */
 
 val Lato = FontFamily(
-    Font(R.font.lato_regular)
+    Font(R.font.lato_regular),
 )
 
 val LatoLightItalic = FontFamily(
-    Font(R.font.lato_light)
+    Font(R.font.lato_light),
 )
 val LatoThin = FontFamily(
-    Font(R.font.lato_thin)
+    Font(R.font.lato_thin),
 )
 val FuturaHeavy = FontFamily(
-    Font(R.font.futura_heavy)
+    Font(R.font.futura_heavy),
 )
 val FuturaLight = FontFamily(
-    Font(R.font.futura_light)
+    Font(R.font.futura_light),
 )
 val FuturaMedium = FontFamily(
-    Font(R.font.futura_medium_bt)
+    Font(R.font.futura_medium_bt),
 )

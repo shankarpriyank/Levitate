@@ -22,8 +22,4 @@ task installPreCommitHook(type: Copy) {
     fileMode 0777
 }
 
-tasks.getByPath(':app:preBuild').dependsOn installGitHook
-
-tasks.named('check') {
-    dependsOn 'installKotlinterPrePushHook'
-}
+tasks.getByPath(':app:preBuild').dependsOn installPreCommitHook

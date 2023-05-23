@@ -79,19 +79,19 @@ jobs:
           path: '**/build/reports/tests/'
 
 
-#   code_formatting_job:
-#     name: Code Formatting
-#     runs-on: ubuntu-latest
-#     continue-on-error: true
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+  code_formatting_job:
+    name: Code Formatting
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#       - name : Grant Permission
-#         run : chmod +x gradlew
+      - name : Grant Permission
+        run : chmod +x gradlew
 
-#       - name: Run ktlint check
-#         run: ./gradlew ktlintCheck --continue
+      - name: Run ktlint check
+        run:  ./gradlew check   --continue
 
 #       - name: Upload ktlint Reports
 #         if: ${{ always() }}

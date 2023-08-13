@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+echo "Formatting Code"
+./gradlew app:formatKotlin
 echo "Checking code formatting"
 
 ./gradlew app:lintKotlin --daemon

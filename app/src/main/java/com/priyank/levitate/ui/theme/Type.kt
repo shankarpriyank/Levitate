@@ -46,5 +46,5 @@ val FuturaLight = FontFamily(
     Font(R.font.futura_light),
 )
 val FuturaMedium = FontFamily(
-     Font(R.font.futura_medium_bt),
+    Font(R.font.futura_medium_bt),
 )

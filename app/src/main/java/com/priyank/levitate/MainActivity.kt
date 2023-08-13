@@ -43,7 +43,7 @@ fun Greeting(name: String) {
     Text(
         text = "Hello $name!",
         fontFamily = LatoLightItalic,
-        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
     )
 }
 
@@ -62,17 +62,36 @@ fun MovingWaveGradient() {
             modifier = Modifier.padding(start = 60.dp, top = 100.dp),
             text = "Welcome to,",
             fontSize = 24.sp,
-            fontFamily = Lato
+            fontFamily = Lato,
         )
         Text(
             modifier = Modifier.padding(start = 60.dp),
             text = "Levitate",
             fontSize = 24.sp,
             fontFamily = FuturaMedium,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             fontWeight = FontWeight(700),
-            color = Purple
+            color = Purple,
         )
     }
-
-
 }

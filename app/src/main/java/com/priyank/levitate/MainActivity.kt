@@ -70,26 +70,6 @@ fun MovingWaveGradient() {
             fontSize = 24.sp,
             fontFamily = FuturaMedium,
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             fontWeight = FontWeight(700),
             color = Purple,
         )

@@ -1,4 +1,19 @@
 #!/bin/bash
+echo "Running code formatting"
+
+# Run the formatting task
+./gradlew app:formatKotlin --daemon
+
+FORMAT_STATUS=$?
+
+# Check if formatting was successful
+if [ "$FORMAT_STATUS" != 0 ]; then
+  echo "Formatting failed. Please fix the formatting issues."
+  exit 1
+fi
+
+# Add the changes resulting from formatting
+git add .
 
 echo "Checking code formatting"
 

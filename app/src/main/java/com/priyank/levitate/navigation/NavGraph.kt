@@ -6,7 +6,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.priyank.levitate.onboarding.presentation.AddPhotosScreen
-import com.priyank.levitate.onboarding.presentation.ConsentScreen
 import com.priyank.levitate.onboarding.presentation.EnterBdayScreen
 import com.priyank.levitate.onboarding.presentation.EnterBioScreen
 import com.priyank.levitate.onboarding.presentation.EnterCompanyScreen
@@ -16,6 +15,7 @@ import com.priyank.levitate.onboarding.presentation.EnterJam
 import com.priyank.levitate.onboarding.presentation.EnterLinkdinUrlScreen
 import com.priyank.levitate.onboarding.presentation.EnterNameScreen
 import com.priyank.levitate.onboarding.presentation.LoginScreen
+import com.priyank.levitate.onboarding.presentation.TermsAndConditionScreen
 import com.priyank.levitate.onboarding.presentation.VerificationScreen
 
 @Composable
@@ -28,7 +28,7 @@ fun SetupNavGraph(
         startDestination = startDestination,
     ) {
         composable(route = Route.CONSENT) {
-            ConsentScreen(navHostController = navController, onboardingScreenViewModel = hiltViewModel())
+            TermsAndConditionScreen(navHostController = navController, onboardingScreenViewModel = hiltViewModel())
         }
         composable(route = Route.LOGIN_WITH_GMAIL) {
             LoginScreen(navHostController = navController)

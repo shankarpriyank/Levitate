@@ -1,5 +1,6 @@
 package com.priyank.levitate.onboarding.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,21 +29,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
 
 // TODO:  Change Fix the Ui
 @Composable
-fun ConsentScreen(
+fun TermsAndConditionScreen(
     navHostController: NavHostController,
     onboardingScreenViewModel: OnboardingScreenViewModel,
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(26.dp),
+            .padding(26.dp)
+            .verticalScroll(rememberScrollState()),
 
     ) {
         Text(
@@ -64,10 +68,7 @@ fun ConsentScreen(
             modifier = Modifier
                 .fillMaxWidth(30f)
                 .padding(start = 34.dp, top = 35.dp, bottom = 30.dp)
-                .heightIn(max = 400.dp)
-                .verticalScroll(
-                    rememberScrollState(),
-                ),
+                .heightIn(max = 400.dp),
             text = "Lorem ipsum dolor sit amet consectetur adipiscing elit\n\n, urna consequat felis vehicula class ultricies mollis dictumst\n, aenean non a in donec nulla\n\n. Phasellus ante pellentesque erat cufm risus\n consequat imperdiet aliquam\n, integer placerat et turpis mi eros nec lobortis taciti, vehicula nisl litora tellus ligula \nporttitor metus cufm risus consequat imperdiet aliquam\n, integer placerat et turpis.Phasellus ante pellentesque erat cufm risus\n" +
                 " consequat imperdiet aliquam\n\"Lorem ipsum dolor sit amet consectetur adipiscing elit\\n\\n, urna consequat felis vehicula class ultricies mollis dictumst\\n, aenean non a in donec nulla\\n\\n. Phasellus ante pellentesque erat cufm risus\\n consequat imperdiet aliquam\\n, integer placerat et turpis mi eros nec lobortis taciti, vehicula nisl litora tellus ligula \\nporttitor metus cufm risus consequat imperdiet aliquam\\n, integer placerat et turpis.Phasellus ante pellentesque erat cufm risus\\n\" +\n" +
                 "                    \" consequat imperdiet aliquam\\n\"" +
@@ -109,7 +110,17 @@ fun ConsentScreen(
                 .padding(top = 40.dp)
                 .align(Alignment.End),
             shape = RoundedCornerShape(25.dp),
-            onClick = { /*TODO*/ },
+            onClick = {
+                if (onboardingScreenViewModel.consentStatus.value) {
+                    navHostController.navigate(Route.LOGIN_WITH_GMAIL)
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Please agree to the terms before proceeding further",
+                        Toast.LENGTH_LONG,
+                    ).show()
+                }
+            },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(
@@ -126,5 +137,8 @@ fun ConsentScreen(
 @Preview
 @Composable
 fun PreviewConsentScreen() {
-    ConsentScreen(navHostController = NavHostController(LocalContext.current), onboardingScreenViewModel = hiltViewModel())
+    TermsAndConditionScreen(
+        navHostController = NavHostController(LocalContext.current),
+        onboardingScreenViewModel = hiltViewModel(),
+    )
 }

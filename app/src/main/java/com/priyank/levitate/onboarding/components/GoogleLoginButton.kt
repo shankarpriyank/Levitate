@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.priyank.levitate.R
+import com.priyank.levitate.ui.theme.Purple
 import com.priyank.levitate.ui.theme.Shapes
 
 @ExperimentalMaterialApi
@@ -36,7 +37,7 @@ fun SignInButton(
     icon: Painter,
     isLoading: Boolean = false,
     shape: Shape = Shapes.medium,
-    borderColor: Color = Color.LightGray,
+    borderColor: Color = Purple,
     backgroundColor: Color = MaterialTheme.colors.surface,
     progressIndicatorColor: Color = MaterialTheme.colors.primary,
     onClick: () -> Unit,

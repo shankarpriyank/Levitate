@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
@@ -33,7 +34,10 @@ import com.priyank.levitate.ui.theme.Purple
 
 // TODO:  Change Fix the Ui
 @Composable
-fun ConsentScreen(navHostController: NavHostController) {
+fun ConsentScreen(
+    navHostController: NavHostController,
+    onboardingScreenViewModel: OnboardingScreenViewModel,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -78,15 +82,12 @@ fun ConsentScreen(navHostController: NavHostController) {
                 .padding(top = 30.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
-            var check =
-                true
-
             Checkbox(
                 modifier = Modifier
                     .size(10.dp)
                     .padding(top = 4.dp),
-                checked = check,
-                onCheckedChange = {},
+                checked = onboardingScreenViewModel.consentStatus.value,
+                onCheckedChange = { onboardingScreenViewModel.updateConsentStatus(it) },
                 colors = CheckboxDefaults.colors(
                     checkedColor = Purple,
                     uncheckedColor = Color.Gray,
@@ -125,5 +126,5 @@ fun ConsentScreen(navHostController: NavHostController) {
 @Preview
 @Composable
 fun PreviewConsentScreen() {
-    ConsentScreen(navHostController = NavHostController(LocalContext.current))
+    ConsentScreen(navHostController = NavHostController(LocalContext.current), onboardingScreenViewModel = hiltViewModel())
 }

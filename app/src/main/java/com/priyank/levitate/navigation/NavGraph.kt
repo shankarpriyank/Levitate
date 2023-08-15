@@ -1,6 +1,7 @@
 package com.priyank.levitate.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,7 +28,7 @@ fun SetupNavGraph(
         startDestination = startDestination,
     ) {
         composable(route = Route.CONSENT) {
-            ConsentScreen(navHostController = navController)
+            ConsentScreen(navHostController = navController, onboardingScreenViewModel = hiltViewModel())
         }
         composable(route = Route.LOGIN_WITH_GMAIL) {
             LoginScreen(navHostController = navController)

@@ -5,12 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import com.priyank.levitate.ui.theme.LatoLightItalic
+import androidx.navigation.compose.rememberNavController
+import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.navigation.SetupNavGraph
 import com.priyank.levitate.ui.theme.LevitateTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,30 +22,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White,
                 ) {
-                    Greeting(name = "GG")
+                    val navController = rememberNavController()
+
+                    SetupNavGraph(navController = navController, startDestination = Route.CONSENT)
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        fontFamily = LatoLightItalic,
-        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LevitateTheme {
-        Greeting("Android")
-    }
-}
-
-@Composable
-fun GGcreen() {
 }

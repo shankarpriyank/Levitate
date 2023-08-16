@@ -1,6 +1,8 @@
 package com.priyank.levitate.onboarding.presentation
 
 import SignInButton
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.google.android.gms.common.api.ApiException
 import com.priyank.levitate.R
+import com.priyank.levitate.onboarding.GoogleApiContract
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
@@ -28,6 +32,22 @@ import com.priyank.levitate.ui.theme.Purple
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LoginScreen(navHostController: NavHostController) {
+    val signInRequestCode = 1
+    val authResultLauncher =
+        rememberLauncherForActivityResult(contract = GoogleApiContract()) { task ->
+            try {
+                val gsa = task?.getResult(ApiException::class.java)
+
+                if (gsa != null) {
+                    // Success Case
+                } else {
+                    Log.e("Login Failed", "Error")
+                }
+            } catch (e: ApiException) {
+                Log.e("Error in AuthScreen%s", e.toString())
+            }
+        }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -59,7 +79,7 @@ fun LoginScreen(navHostController: NavHostController) {
             loadingText = "Signing in...",
             isLoading = false,
             icon = painterResource(id = R.drawable.ic_google_logo),
-            onClick = { },
+            onClick = { authResultLauncher.launch(signInRequestCode) },
         )
     }
 }

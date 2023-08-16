@@ -71,6 +71,8 @@ dependencies {
 
     // Compose dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation 'com.google.android.gms:play-services-auth:20.6.0'
+
 
     //Accompanist
     implementation "com.google.accompanist:accompanist-pager:0.15.0"

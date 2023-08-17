@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.android.gms.common.api.ApiException
 import com.priyank.levitate.R
@@ -31,7 +32,7 @@ import com.priyank.levitate.ui.theme.Purple
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LoginScreen(navHostController: NavHostController) {
+fun LoginScreen(navHostController: NavHostController, onboardingScreenViewModel: OnboardingScreenViewModel) {
     val signInRequestCode = 1
     val authResultLauncher =
         rememberLauncherForActivityResult(contract = GoogleApiContract()) { task ->
@@ -74,7 +75,10 @@ fun LoginScreen(navHostController: NavHostController) {
             }
         }
         SignInButton(
-            modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(32.dp),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(32.dp),
             text = "Continue in with Google",
             loadingText = "Signing in...",
             isLoading = false,
@@ -87,5 +91,5 @@ fun LoginScreen(navHostController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen() {
-    LoginScreen(navHostController = NavHostController(LocalContext.current))
+    LoginScreen(navHostController = NavHostController(LocalContext.current), onboardingScreenViewModel = hiltViewModel())
 }

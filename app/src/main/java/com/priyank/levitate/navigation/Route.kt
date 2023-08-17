@@ -1,16 +1,16 @@
 package com.priyank.levitate.navigation
 
 object Route {
-    const val CONSENT = "welcome"
-    const val LOGIN_WITH_GMAIL = "age"
-    const val ENTER_NAME = "gender"
-    const val ENTER_BDAY = "height"
-    const val ENTER_GENDER = "weight"
-    const val ENTER_COMPANY = "nutrient_goal"
-    const val ENTER_INTERESTS = "activity"
-    const val ENTER_JAM = "goal"
-    const val ENTER_BIO = "height"
-    const val ENTER_LINKDIN_URL = "weight"
-    const val VERIFICATION_SCREEN = "nutrient_goal"
-    const val ADD_PHOTOS = "activity"
+    const val CONSENT = "consent"
+    const val LOGIN_WITH_GMAIL = "login"
+    const val ENTER_NAME = "name"
+    const val ENTER_BDAY = "bday"
+    const val ENTER_GENDER = "gender"
+    const val ENTER_COMPANY = "company"
+    const val ENTER_INTERESTS = "interests"
+    const val ENTER_JAM = "jam"
+    const val ENTER_BIO = "bio"
+    const val ENTER_LINKDIN_URL = "lindkin"
+    const val VERIFICATION_SCREEN = "verification"
+    const val ADD_PHOTOS = "photos"
 }

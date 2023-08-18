@@ -25,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.android.gms.common.api.ApiException
 import com.priyank.levitate.R
+import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.onboarding.GoogleApiContract
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
@@ -83,7 +84,10 @@ fun LoginScreen(navHostController: NavHostController, onboardingScreenViewModel:
             loadingText = "Signing in...",
             isLoading = false,
             icon = painterResource(id = R.drawable.ic_google_logo),
-            onClick = { authResultLauncher.launch(signInRequestCode) },
+            onClick = {
+                // Todo fix and add google login
+                navHostController.navigate(Route.ENTER_NAME)
+            },
         )
     }
 }

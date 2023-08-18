@@ -8,7 +8,6 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
-import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.navigation.SetupNavGraph
 import com.priyank.levitate.ui.theme.LevitateTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
 
-                    SetupNavGraph(navController = navController, startDestination = Route.CONSENT)
+                    SetupNavGraph(navController = navController, startDestination = "onboarding_nav_graph")
                 }
             }
         }

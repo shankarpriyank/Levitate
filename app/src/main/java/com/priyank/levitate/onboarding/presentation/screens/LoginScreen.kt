@@ -1,4 +1,4 @@
-package com.priyank.levitate.onboarding.presentation
+package com.priyank.levitate.onboarding.presentation.screens
 
 import SignInButton
 import android.app.Activity.RESULT_OK
@@ -28,6 +28,8 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.common.api.ApiException
 import com.priyank.levitate.R
 import com.priyank.levitate.onboarding.GoogleApiContract
+import com.priyank.levitate.onboarding.presentation.GoogleAuthUiClient
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple

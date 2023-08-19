@@ -9,6 +9,7 @@
 
 # Java class files
 *.class
+app/src/main/res/values/strings.xml
 
 # Generated files
 bin/

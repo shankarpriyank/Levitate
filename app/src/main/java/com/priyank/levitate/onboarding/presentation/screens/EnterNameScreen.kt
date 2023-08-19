@@ -1,4 +1,4 @@
-package com.priyank.levitate.onboarding.presentation
+package com.priyank.levitate.onboarding.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package com.priyank.levitate.onboarding.presentation
+package com.priyank.levitate.onboarding.presentation.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -19,6 +19,7 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
@@ -87,7 +89,7 @@ fun TermsAndConditionScreen(
                 modifier = Modifier
                     .size(10.dp)
                     .padding(top = 4.dp),
-                checked = onboardingScreenViewModel.consentStatus.value,
+                checked = onboardingScreenViewModel.consentStatus.collectAsState().value,
                 onCheckedChange = { onboardingScreenViewModel.updateConsentStatus(it) },
                 colors = CheckboxDefaults.colors(
                     checkedColor = Purple,

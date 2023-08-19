@@ -9,19 +9,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.priyank.levitate.onboarding.presentation.AddPhotosScreen
-import com.priyank.levitate.onboarding.presentation.EnterBdayScreen
-import com.priyank.levitate.onboarding.presentation.EnterBioScreen
-import com.priyank.levitate.onboarding.presentation.EnterCompanyScreen
-import com.priyank.levitate.onboarding.presentation.EnterGenderScreen
-import com.priyank.levitate.onboarding.presentation.EnterInterests
-import com.priyank.levitate.onboarding.presentation.EnterJam
-import com.priyank.levitate.onboarding.presentation.EnterLinkdinUrlScreen
-import com.priyank.levitate.onboarding.presentation.EnterNameScreen
-import com.priyank.levitate.onboarding.presentation.LoginScreen
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
-import com.priyank.levitate.onboarding.presentation.TermsAndConditionScreen
-import com.priyank.levitate.onboarding.presentation.VerificationScreen
+import com.priyank.levitate.onboarding.presentation.screens.AddPhotosScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterBdayScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterBioScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterCompanyScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterGenderScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterInterests
+import com.priyank.levitate.onboarding.presentation.screens.EnterJam
+import com.priyank.levitate.onboarding.presentation.screens.EnterLinkdinUrlScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterNameScreen
+import com.priyank.levitate.onboarding.presentation.screens.LoginScreen
+import com.priyank.levitate.onboarding.presentation.screens.TermsAndConditionScreen
+import com.priyank.levitate.onboarding.presentation.screens.VerificationScreen
 
 @Composable
 fun SetupNavGraph(

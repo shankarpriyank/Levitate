@@ -25,9 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.common.api.ApiException
 import com.priyank.levitate.R
-import com.priyank.levitate.onboarding.GoogleApiContract
 import com.priyank.levitate.onboarding.presentation.GoogleAuthUiClient
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
@@ -66,21 +64,6 @@ fun LoginScreen(
             }
         },
     )
-    val signInRequestCode = 1
-    val authResultLauncher =
-        rememberLauncherForActivityResult(contract = GoogleApiContract()) { task ->
-            try {
-                val gsa = task?.getResult(ApiException::class.java)
-
-                if (gsa != null) {
-                    // Success Case
-                } else {
-                    Log.e("Login Failed", "Error")
-                }
-            } catch (e: ApiException) {
-                Log.e("Error in AuthScreen%s", e.toString())
-            }
-        }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(

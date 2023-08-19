@@ -1,4 +1,4 @@
-package com.priyank.levitate.onboarding.presentation
+package com.priyank.levitate.onboarding.domain.model
 
 data class SignInResult(
     val data: UserData?,

@@ -8,7 +8,7 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.priyank.levitate.R
+import com.priyank.levitate.BuildConfig
 import com.priyank.levitate.onboarding.domain.model.SignInResult
 import com.priyank.levitate.onboarding.domain.model.UserData
 import kotlinx.coroutines.tasks.await
@@ -83,7 +83,7 @@ class GoogleAuthUiClient(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId(context.getString(R.string.gcp_id))
+                    .setServerClientId(BuildConfig.API_KEY)
                     .build(),
             )
             .setAutoSelectEnabled(true)

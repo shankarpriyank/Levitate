@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Levitate</string>
+  <string name="gcp_id">{{ secrets.API_KEY }}</string>
+</resources>

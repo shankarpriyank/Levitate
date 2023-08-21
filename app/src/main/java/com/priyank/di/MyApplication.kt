@@ -1,4 +1,4 @@
-package com.priyank.levitate
+package com.priyank.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

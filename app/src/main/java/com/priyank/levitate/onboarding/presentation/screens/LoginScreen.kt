@@ -56,7 +56,11 @@ fun LoginScreen(
                     val signInResult = googleAuthUiClient.signInWithIntent(
                         intent = result.data ?: return@launch,
                     )
-                    Log.e("Sucess", "${signInResult.data?.username ?: "GG"} ")
+                    onboardingScreenViewModel.updateUserDetails(
+                        id = signInResult.data?.userId,
+                        name = signInResult.data?.username,
+                        email = signInResult.data?.email,
+                    )
                 }
             } else {
                 Log.e("GG", result.resultCode.toString())

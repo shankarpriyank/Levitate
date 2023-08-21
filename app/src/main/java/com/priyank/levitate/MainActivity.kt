@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.priyank.levitate.navigation.SetupNavGraph
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.LevitateTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,8 +26,12 @@ class MainActivity : ComponentActivity() {
                     color = Color.White,
                 ) {
                     val navController = rememberNavController()
+                    val onboardingScreenViewModel: OnboardingScreenViewModel = hiltViewModel()
 
-                    SetupNavGraph(navController = navController, startDestination = "onboarding_nav_graph")
+                    SetupNavGraph(
+                        navController = navController,
+                        startDestination = if (onboardingScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
+                    )
                 }
             }
         }

@@ -17,6 +17,9 @@ class OnboardingScreenViewModel @Inject constructor(
     fun updateConsentStatus(consent: Boolean) {
         consentStatus.value = consent
     }
+    fun isUserLoggedIn(): Boolean {
+        return userDetails.isLoggedIn()
+    }
 
     fun updateUserDetails(
         id: String?,

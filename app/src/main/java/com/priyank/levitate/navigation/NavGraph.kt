@@ -32,7 +32,7 @@ fun SetupNavGraph(
         navController = navController,
         startDestination = startDestination,
     ) {
-        navigation(startDestination = Route.CONSENT, route = "onboarding_nav_graph") {
+        navigation(startDestination = Route.CONSENT, route = "login_nav_graph") {
             composable(route = Route.CONSENT) { entry ->
                 TermsAndConditionScreen(
                     navHostController = navController,
@@ -49,6 +49,8 @@ fun SetupNavGraph(
                     ),
                 )
             }
+        }
+        navigation(startDestination = Route.ENTER_NAME, route = "onboarding_nav_graph") {
             composable(route = Route.ENTER_NAME) {
                 EnterNameScreen(navHostController = navController)
             }

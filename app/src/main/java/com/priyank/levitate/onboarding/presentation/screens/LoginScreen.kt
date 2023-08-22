@@ -27,7 +27,7 @@ import androidx.navigation.NavHostController
 import com.google.android.gms.auth.api.identity.Identity
 import com.priyank.levitate.R
 import com.priyank.levitate.onboarding.presentation.GoogleAuthUiClient
-import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
+import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     navHostController: NavHostController,
-    onboardingScreenViewModel: OnboardingScreenViewModel,
+    loginScreenViewModel: LoginScreenViewModel,
 ) {
     val context = LocalContext.current
     val googleAuthUiClient by lazy {
@@ -56,7 +56,7 @@ fun LoginScreen(
                     val signInResult = googleAuthUiClient.signInWithIntent(
                         intent = result.data ?: return@launch,
                     )
-                    onboardingScreenViewModel.updateUserDetails(
+                    loginScreenViewModel.updateUserDetails(
                         id = signInResult.data?.userId,
                         name = signInResult.data?.username,
                         email = signInResult.data?.email,

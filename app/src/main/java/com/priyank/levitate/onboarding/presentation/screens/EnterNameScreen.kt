@@ -19,14 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
@@ -34,7 +33,7 @@ import com.priyank.levitate.ui.theme.Purple
 // Todo handle state, and clicks
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun EnterNameScreen(navHostController: NavHostController) {
+fun EnterNameScreen(navHostController: NavHostController, onboardingScreenViewModel: OnboardingScreenViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -115,10 +114,4 @@ fun EnterNameScreen(navHostController: NavHostController) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewEnterNameScreen() {
-    EnterNameScreen(navHostController = NavHostController(LocalContext.current))
 }

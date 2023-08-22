@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
+import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
 import com.priyank.levitate.onboarding.presentation.screens.AddPhotosScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterBdayScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterBioScreen
@@ -36,7 +36,7 @@ fun SetupNavGraph(
             composable(route = Route.CONSENT) { entry ->
                 TermsAndConditionScreen(
                     navHostController = navController,
-                    onboardingScreenViewModel = entry.sharedViewModel<OnboardingScreenViewModel>(
+                    loginScreenViewModel = entry.sharedViewModel<LoginScreenViewModel>(
                         navController = navController,
                     ),
                 )
@@ -44,15 +44,20 @@ fun SetupNavGraph(
             composable(route = Route.LOGIN_WITH_GMAIL) { entry ->
                 LoginScreen(
                     navHostController = navController,
-                    onboardingScreenViewModel = entry.sharedViewModel<OnboardingScreenViewModel>(
+                    loginScreenViewModel = entry.sharedViewModel<LoginScreenViewModel>(
                         navController = navController,
                     ),
                 )
             }
         }
         navigation(startDestination = Route.ENTER_NAME, route = "onboarding_nav_graph") {
-            composable(route = Route.ENTER_NAME) {
-                EnterNameScreen(navHostController = navController)
+            composable(route = Route.ENTER_NAME) { entry ->
+                EnterNameScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.ENTER_BDAY) {
                 EnterBdayScreen(navHostController = navController)

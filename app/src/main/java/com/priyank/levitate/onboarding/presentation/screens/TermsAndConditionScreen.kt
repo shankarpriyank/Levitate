@@ -1,7 +1,6 @@
 package com.priyank.levitate.onboarding.presentation.screens
 
 import android.widget.Toast
-import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
-import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
+import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
@@ -50,7 +49,7 @@ import kotlin.math.roundToInt
 @Composable
 fun TermsAndConditionScreen(
     navHostController: NavHostController,
-    onboardingScreenViewModel: OnboardingScreenViewModel,
+    loginScreenViewModel: LoginScreenViewModel,
 ) {
     val context = LocalContext.current
     Column(
@@ -99,8 +98,8 @@ fun TermsAndConditionScreen(
                 modifier = Modifier
                     .size(10.dp)
                     .padding(top = 4.dp),
-                checked = onboardingScreenViewModel.consentStatus.collectAsState().value,
-                onCheckedChange = { onboardingScreenViewModel.updateConsentStatus(it) },
+                checked = loginScreenViewModel.consentStatus.collectAsState().value,
+                onCheckedChange = { loginScreenViewModel.updateConsentStatus(it) },
                 colors = CheckboxDefaults.colors(
                     checkedColor = Purple,
                     uncheckedColor = Color.Gray,
@@ -136,7 +135,7 @@ fun TermsAndConditionScreen(
                 .align(Alignment.End).offset { IntOffset(shake.value.roundToInt(), 0) },
             shape = RoundedCornerShape(25.dp),
             onClick = {
-                if (onboardingScreenViewModel.consentStatus.value) {
+                if (loginScreenViewModel.consentStatus.value) {
                     navHostController.navigate(Route.LOGIN_WITH_GMAIL)
                 } else {
                     trigger = System.currentTimeMillis()
@@ -165,6 +164,6 @@ fun TermsAndConditionScreen(
 fun PreviewConsentScreen() {
     TermsAndConditionScreen(
         navHostController = NavHostController(LocalContext.current),
-        onboardingScreenViewModel = hiltViewModel(),
+        loginScreenViewModel = hiltViewModel(),
     )
 }

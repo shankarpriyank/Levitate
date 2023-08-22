@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.priyank.levitate.navigation.SetupNavGraph
-import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
+import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
 import com.priyank.levitate.ui.theme.LevitateTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,11 +26,11 @@ class MainActivity : ComponentActivity() {
                     color = Color.White,
                 ) {
                     val navController = rememberNavController()
-                    val onboardingScreenViewModel: OnboardingScreenViewModel = hiltViewModel()
+                    val loginScreenViewModel: LoginScreenViewModel = hiltViewModel()
 
                     SetupNavGraph(
                         navController = navController,
-                        startDestination = if (onboardingScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
+                        startDestination = if (loginScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
                     )
                 }
             }

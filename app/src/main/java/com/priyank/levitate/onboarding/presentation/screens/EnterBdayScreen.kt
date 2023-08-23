@@ -13,7 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,13 +25,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun EnterBdayScreen(navHostController: NavHostController) {
+fun EnterBdayScreen(navHostController: NavHostController, onboardingScreenViewModel: OnboardingScreenViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -74,23 +76,27 @@ fun EnterBdayScreen(navHostController: NavHostController) {
                 fontSize = 24.sp,
                 fontWeight = FontWeight(400),
             )
-            // Todo move to viewModel
-            var text = remember {
-                ""
-            }
+
             TextField(
-                value = text,
+                placeholder = { Text(text = "DD/MM/YYYY") },
+                value = onboardingScreenViewModel.bday.collectAsState().value,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 0.dp),
                 onValueChange = {
+                    onboardingScreenViewModel.updateBday(it)
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,
+                    cursorColor = Purple,
+                    focusedIndicatorColor = Purple,
                 ),
+
             )
             Text(
-                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 6.dp),
                 text = "Your age will be public",
                 color = Color.Gray,
                 fontSize = 12.sp,
@@ -101,7 +107,7 @@ fun EnterBdayScreen(navHostController: NavHostController) {
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = {},
+            onClick = { navHostController.navigate(Route.ENTER_GENDER) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(

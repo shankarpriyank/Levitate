@@ -75,8 +75,13 @@ fun SetupNavGraph(
                     ),
                 )
             }
-            composable(route = Route.ENTER_COMPANY) {
-                EnterCompanyScreen(navHostController = navController)
+            composable(route = Route.ENTER_COMPANY) { entry ->
+                EnterCompanyScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.ENTER_INTERESTS) {
                 EnterInterests(navHostController = navController)

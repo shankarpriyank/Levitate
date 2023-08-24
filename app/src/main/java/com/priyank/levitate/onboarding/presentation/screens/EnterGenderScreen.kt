@@ -18,22 +18,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun EnterGenderScreen(navHostController: NavHostController) {
+fun EnterGenderScreen(
+    navHostController: NavHostController,
+    onboardingScreenViewModel: OnboardingScreenViewModel,
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +82,10 @@ fun EnterGenderScreen(navHostController: NavHostController) {
             Button(
                 modifier = Modifier.widthIn(min = 120.dp),
                 shape = RoundedCornerShape(25.dp),
-                onClick = { navHostController.navigate(Route.ENTER_GENDER) },
+                onClick = {
+                    onboardingScreenViewModel.setGender("MAN")
+                    navHostController.navigate(Route.ENTER_COMPANY)
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 border = BorderStroke(width = 2.dp, color = Color.Gray),
             ) {
@@ -94,9 +99,14 @@ fun EnterGenderScreen(navHostController: NavHostController) {
             }
 
             Button(
-                modifier = Modifier.widthIn(min = 120.dp).padding(top = 20.dp),
+                modifier = Modifier
+                    .widthIn(min = 120.dp)
+                    .padding(top = 20.dp),
                 shape = RoundedCornerShape(25.dp),
-                onClick = { navHostController.navigate(Route.ENTER_GENDER) },
+                onClick = {
+                    onboardingScreenViewModel.setGender("MAN")
+                    navHostController.navigate(Route.ENTER_COMPANY)
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 border = BorderStroke(width = 2.dp, color = Color.Gray),
             ) {
@@ -110,10 +120,4 @@ fun EnterGenderScreen(navHostController: NavHostController) {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun gg() {
-    EnterGenderScreen(navHostController = NavHostController(LocalContext.current))
 }

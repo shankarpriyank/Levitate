@@ -15,11 +15,16 @@ class OnboardingScreenViewModel @Inject constructor() : ViewModel() {
     private val _bday = MutableStateFlow("")
     val bday = _bday.asStateFlow()
 
+    private var gender = ""
     fun updateName(name: String) {
         _name.value = name
     }
 
     fun updateBday(name: String) {
         _name.value = name
+    }
+
+    fun setGender(string: String) {
+        gender = string
     }
 }

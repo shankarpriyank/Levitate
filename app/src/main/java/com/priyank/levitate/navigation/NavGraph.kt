@@ -67,8 +67,13 @@ fun SetupNavGraph(
                     ),
                 )
             }
-            composable(route = Route.ENTER_GENDER) {
-                EnterGenderScreen(navHostController = navController)
+            composable(route = Route.ENTER_GENDER) { entry ->
+                EnterGenderScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.ENTER_COMPANY) {
                 EnterCompanyScreen(navHostController = navController)

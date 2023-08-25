@@ -4,13 +4,16 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -73,12 +76,28 @@ fun EnterInterests(
             fontWeight = FontWeight(400),
         )
 
-        LazyVerticalStaggeredGrid(columns = StaggeredGridCells.Fixed(3), contentPadding = PaddingValues(8.dp)) {
-            items(count = onboardingScreenViewModel.interests.value.size) {
-                for (interests in onboardingScreenViewModel.interests.collectAsState().value) {
+        Column {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 140.dp),
+                text = "My Interests is",
+                fontFamily = Lato,
+                fontSize = 24.sp,
+                fontWeight = FontWeight(400),
+            )
+
+            val items = onboardingScreenViewModel.interests.collectAsState().value
+            LazyVerticalStaggeredGrid(
+                modifier = Modifier.padding(top = 32.dp),
+                columns = StaggeredGridCells.Adaptive(minSize = 120.dp),
+                contentPadding = PaddingValues(8.dp),
+            ) {
+                items(items) {
                     Button(
                         modifier = Modifier
-                            .widthIn(min = 100.dp).heightIn(min = 30.dp),
+                            .widthIn(min = 80.dp)
+                            .heightIn(min = 24.dp),
                         shape = RoundedCornerShape(25.dp),
                         onClick = {
                         },

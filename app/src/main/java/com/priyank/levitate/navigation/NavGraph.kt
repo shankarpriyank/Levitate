@@ -83,8 +83,13 @@ fun SetupNavGraph(
                     ),
                 )
             }
-            composable(route = Route.ENTER_INTERESTS) {
-                EnterInterests(navHostController = navController)
+            composable(route = Route.ENTER_INTERESTS) { entry ->
+                EnterInterests(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.ENTER_JAM) {
                 EnterJam(navHostController = navController)

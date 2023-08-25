@@ -15,6 +15,10 @@ class OnboardingScreenViewModel @Inject constructor() : ViewModel() {
     private val _bday = MutableStateFlow("")
     val bday = _bday.asStateFlow()
 
+    val gg = mutableListOf<String>()
+    private val _interests = MutableStateFlow<List<String>>(gg)
+    val interests = _interests.asStateFlow()
+
     private val _companyName = MutableStateFlow("")
     val companyName = _companyName.asStateFlow()
 
@@ -33,5 +37,11 @@ class OnboardingScreenViewModel @Inject constructor() : ViewModel() {
 
     fun updateCompanyName(company: String) {
         _companyName.value = company
+    }
+
+    init {
+        for (i in 0..100) {
+            gg.add("GG $i")
+        }
     }
 }

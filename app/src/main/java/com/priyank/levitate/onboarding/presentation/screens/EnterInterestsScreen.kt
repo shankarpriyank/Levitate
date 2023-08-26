@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
@@ -81,23 +82,31 @@ fun EnterInterests(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 140.dp),
-                text = "My Interests is",
+                text = "My Interests are",
                 fontFamily = Lato,
                 fontSize = 24.sp,
                 fontWeight = FontWeight(400),
             )
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 6.dp),
+                text = "Let people who what do you like",
+                color = Color.Gray,
+                fontSize = 12.sp,
+            )
 
             val items = onboardingScreenViewModel.interests.collectAsState().value
             LazyVerticalStaggeredGrid(
-                modifier = Modifier.padding(top = 32.dp),
-                columns = StaggeredGridCells.Adaptive(minSize = 120.dp),
+                modifier = Modifier.padding(top = 32.dp, bottom = 32.dp),
+                columns = StaggeredGridCells.Adaptive(minSize = 100.dp),
                 contentPadding = PaddingValues(8.dp),
             ) {
                 items(items) {
                     Button(
                         modifier = Modifier
-                            .widthIn(min = 80.dp)
-                            .heightIn(min = 24.dp),
+                            .widthIn(min = 40.dp)
+                            .heightIn(min = 20.dp),
                         shape = RoundedCornerShape(25.dp),
                         onClick = {
                         },
@@ -106,14 +115,29 @@ fun EnterInterests(
                     ) {
                         Text(
                             text = "Woman",
-                            fontSize = 24.sp,
+                            fontSize = 14.sp,
                             fontFamily = Lato,
-                            fontWeight = FontWeight(400),
+                            fontWeight = FontWeight(500),
                             color = Color.Gray,
                         )
                     }
                 }
             }
+        }
+        Button(
+            modifier = Modifier
+                .align(Alignment.BottomEnd),
+            shape = RoundedCornerShape(25.dp),
+            onClick = { navHostController.navigate(Route.ENTER_INTERESTS) },
+            colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
+        ) {
+            Text(
+                text = "Continue",
+                fontSize = 24.sp,
+                fontFamily = Lato,
+                fontWeight = FontWeight(400),
+                color = Color.White,
+            )
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.priyank.levitate.onboarding.presentation.screens
 
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.widget.Toast
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
@@ -36,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.getSystemService
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
@@ -52,6 +56,7 @@ fun TermsAndConditionScreen(
     loginScreenViewModel: LoginScreenViewModel,
 ) {
     val context = LocalContext.current
+    var vibration = context.getSystemService<Vibrator>()as Vibrator
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -132,13 +137,25 @@ fun TermsAndConditionScreen(
         Button(
             modifier = Modifier
                 .padding(top = 40.dp)
-                .align(Alignment.End).offset { IntOffset(shake.value.roundToInt(), 0) },
+                .align(Alignment.End)
+                .offset { IntOffset(shake.value.roundToInt(), 0) },
             shape = RoundedCornerShape(25.dp),
             onClick = {
                 if (loginScreenViewModel.consentStatus.value) {
                     navHostController.navigate(Route.LOGIN_WITH_GMAIL)
                 } else {
                     trigger = System.currentTimeMillis()
+
+                    if (Build.VERSION.SDK_INT >= 26) {
+                        vibration.vibrate(
+                            VibrationEffect.createOneShot(
+                                200,
+                                VibrationEffect.DEFAULT_AMPLITUDE,
+                            ),
+                        )
+                    } else {
+                        vibration.vibrate(200)
+                    }
                     Toast.makeText(
                         context,
                         "Please agree to the terms before proceeding further",

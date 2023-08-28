@@ -128,7 +128,7 @@ fun EnterInterests(
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { navHostController.navigate(Route.ENTER_INTERESTS) },
+            onClick = { navHostController.navigate(Route.ENTER_JAM) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(

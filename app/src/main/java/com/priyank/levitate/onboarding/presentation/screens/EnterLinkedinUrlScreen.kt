@@ -13,28 +13,27 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
 import com.priyank.levitate.ui.theme.Purple
 
-// Todo figure out how to add get the list of songs, and how to store them
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun EnterJam(navHostController: NavHostController) {
+fun EnterLinkedinUrlScreen(navHostController: NavHostController, onboardingScreenViewModel: OnboardingScreenViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,17 +71,18 @@ fun EnterJam(navHostController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 140.dp),
-                text = "My Jam",
+                text = "My Linkedin is",
                 fontFamily = Lato,
                 fontSize = 24.sp,
                 fontWeight = FontWeight(400),
             )
             TextField(
-                value = "gg",
+                value = onboardingScreenViewModel.linkedInUrl.collectAsState().value,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 0.dp),
                 onValueChange = {
+                    onboardingScreenViewModel.updateLinkdInUrl(it)
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,
@@ -94,7 +94,7 @@ fun EnterJam(navHostController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 6.dp),
-                text = "Let people know what you generally listen to by adding it to your profile.",
+                text = "We need this to verify your background, that the only way we keep this community organized",
                 color = Color.Gray,
                 fontSize = 12.sp,
             )
@@ -103,7 +103,7 @@ fun EnterJam(navHostController: NavHostController) {
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { navHostController.navigate(Route.ENTER_LINKDIN_URL) },
+            onClick = { navHostController.navigate(Route.ENTER_BDAY) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(
@@ -115,10 +115,4 @@ fun EnterJam(navHostController: NavHostController) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun GG() {
-    EnterJam(navHostController = NavHostController(context = LocalContext.current))
 }

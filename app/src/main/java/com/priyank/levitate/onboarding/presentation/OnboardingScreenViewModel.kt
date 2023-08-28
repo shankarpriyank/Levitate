@@ -22,6 +22,9 @@ class OnboardingScreenViewModel @Inject constructor() : ViewModel() {
     private val _companyName = MutableStateFlow("")
     val companyName = _companyName.asStateFlow()
 
+    private val _linkedInUrl = MutableStateFlow("")
+    val linkedInUrl = _linkedInUrl.asStateFlow()
+
     private var gender = ""
     fun updateName(name: String) {
         _name.value = name
@@ -37,6 +40,9 @@ class OnboardingScreenViewModel @Inject constructor() : ViewModel() {
 
     fun updateCompanyName(company: String) {
         _companyName.value = company
+    }
+    fun updateLinkdInUrl(linkedIn: String) {
+        _linkedInUrl.value = linkedIn
     }
 
     init {

@@ -17,7 +17,7 @@ import com.priyank.levitate.onboarding.presentation.screens.EnterCompanyScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterGenderScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterInterests
 import com.priyank.levitate.onboarding.presentation.screens.EnterJam
-import com.priyank.levitate.onboarding.presentation.screens.EnterLinkdinUrlScreen
+import com.priyank.levitate.onboarding.presentation.screens.EnterLinkedinUrlScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterNameScreen
 import com.priyank.levitate.onboarding.presentation.screens.LoginScreen
 import com.priyank.levitate.onboarding.presentation.screens.TermsAndConditionScreen
@@ -97,8 +97,13 @@ fun SetupNavGraph(
             composable(route = Route.ENTER_BIO) {
                 EnterBioScreen(navHostController = navController)
             }
-            composable(route = Route.ENTER_LINKDIN_URL) {
-                EnterLinkdinUrlScreen(navHostController = navController)
+            composable(route = Route.ENTER_LINKDIN_URL) { entry ->
+                EnterLinkedinUrlScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.VERIFICATION_SCREEN) {
                 VerificationScreen(navHostController = navController)

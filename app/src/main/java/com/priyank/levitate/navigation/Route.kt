@@ -13,6 +13,7 @@ object Route {
     const val ENTER_LINKDIN_URL = "lindkin"
     const val VERIFICATION_SCREEN = "verification"
     const val ADD_PHOTOS = "photos"
+    const val DATING = "dating"
 
     object InnerRoute {
         val HOMESCREEN = "home"

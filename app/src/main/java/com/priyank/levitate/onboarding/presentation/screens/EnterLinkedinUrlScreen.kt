@@ -103,7 +103,7 @@ fun EnterLinkedinUrlScreen(navHostController: NavHostController, onboardingScree
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { navHostController.navigate(Route.ENTER_BDAY) },
+            onClick = { navHostController.navigate(Route.DATING) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(

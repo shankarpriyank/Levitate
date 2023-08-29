@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.priyank.levitate.dating.presentation.MatchingScreen
 import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
 import com.priyank.levitate.onboarding.presentation.screens.AddPhotosScreen
 import com.priyank.levitate.onboarding.presentation.screens.EnterBdayScreen
@@ -110,6 +111,9 @@ fun SetupNavGraph(
             }
             composable(route = Route.ADD_PHOTOS) {
                 AddPhotosScreen(navHostController = navController)
+            }
+            composable(route = Route.DATING) {
+                MatchingScreen()
             }
         }
     }

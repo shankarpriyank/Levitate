@@ -1,8 +1,8 @@
-package com.priyank.di
+package com.priyank.levitate.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import com.priyank.levitate.data.UserDetails
+import com.priyank.levitate.onboarding.data.UserDetails
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

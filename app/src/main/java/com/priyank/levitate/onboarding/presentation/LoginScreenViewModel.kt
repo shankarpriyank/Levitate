@@ -2,7 +2,7 @@ package com.priyank.levitate.onboarding.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.priyank.levitate.data.UserDetails
+import com.priyank.levitate.onboarding.data.UserDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

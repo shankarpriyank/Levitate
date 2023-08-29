@@ -1,4 +1,4 @@
-package com.priyank.levitate.data
+package com.priyank.levitate.onboarding.data
 
 import android.content.SharedPreferences
 

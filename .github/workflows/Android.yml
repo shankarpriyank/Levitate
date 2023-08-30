@@ -29,8 +29,10 @@ jobs:
             ${{ runner.os }}-gradle-
       - name : Grant Permission
         run : chmod +x gradlew
-      - name : Add local.properties
-        run : touch local.properties
+      - name: Generate local.properties
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo $LOCAL_PROPERTIES > ./local.properties
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest --continue
@@ -93,6 +95,11 @@ jobs:
       - name : Grant Permission
         run : chmod +x gradlew
 
+      - name: Generate local.properties
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo $LOCAL_PROPERTIES > ./local.properties
+
       - name: Run ktlint check
         run:  ./gradlew check   --continue
 
@@ -125,6 +132,12 @@ jobs:
 
       - name : Grant Permission
         run : chmod +x gradlew
+
+      - name: Generate local.properties
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo $LOCAL_PROPERTIES > ./local.properties
+
       - name: Run Debug Lint
         run: ./gradlew lintDebug
 
@@ -156,6 +169,11 @@ jobs:
 
       - name : Grant Permission
         run : chmod +x gradlew
+
+      - name: Generate local.properties
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo $LOCAL_PROPERTIES > ./local.properties
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 

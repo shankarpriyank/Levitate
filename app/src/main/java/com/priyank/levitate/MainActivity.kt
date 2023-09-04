@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
 
                     SetupNavGraph(
                         navController = navController,
-                        startDestination = if (loginScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
+                        // TODO revert back
+                        startDestination = if (!loginScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
                     )
                 }
             }

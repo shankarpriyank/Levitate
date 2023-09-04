@@ -1,11 +1,11 @@
 package com.priyank.levitate.onboarding.domain.model
 
 data class SignInResult(
-    val data: UserData?,
+    val data: SigninUserData?,
     val errorMessage: String?,
 )
 
-data class UserData(
+data class SigninUserData(
     val userId: String,
     val username: String?,
     val email: String?,

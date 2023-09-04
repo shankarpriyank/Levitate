@@ -10,7 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.priyank.levitate.BuildConfig
 import com.priyank.levitate.onboarding.domain.model.SignInResult
-import com.priyank.levitate.onboarding.domain.model.UserData
+import com.priyank.levitate.onboarding.domain.model.SigninUserData
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
 
@@ -41,7 +41,7 @@ class GoogleAuthUiClient(
             val user = auth.signInWithCredential(googleCredentials).await().user
             SignInResult(
                 data = user?.run {
-                    UserData(
+                    SigninUserData(
                         userId = uid,
                         username = displayName,
                         profilePictureUrl = photoUrl?.toString(),
@@ -70,8 +70,8 @@ class GoogleAuthUiClient(
         }
     }
 
-    fun getSignedInUser(): UserData? = auth.currentUser?.run {
-        UserData(
+    fun getSignedInUser(): SigninUserData? = auth.currentUser?.run {
+        SigninUserData(
             userId = uid,
             username = displayName,
             profilePictureUrl = photoUrl?.toString(),

@@ -7,14 +7,12 @@ on:
   pull_request:
     branches: [ main ]
 
-
 jobs:
   test_job:
     name: Test
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -27,8 +25,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - name : Grant Permission
         run : chmod +x gradlew
+
       - name: Generate local.properties
         env:
           LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
@@ -45,7 +45,7 @@ jobs:
           path: '**/build/reports/tests/'
 
   android-app-tests:
-    name : Instrumented Tests
+    name: Instrumented Tests
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -83,7 +83,6 @@ jobs:
           name: test-reports
           path: '**/build/reports/tests/'
 
-
   code_formatting_job:
     name: Code Formatting
     runs-on: ubuntu-latest
@@ -103,20 +102,11 @@ jobs:
       - name: Run ktlint check
         run:  ./gradlew check   --continue
 
-#       - name: Upload ktlint Reports
-#         if: ${{ always() }}
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: ktlint-report
-#           path: '**/build/reports/ktlint'
-
-
   lint_job:
     name: Lint
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -147,36 +137,26 @@ jobs:
         with:
           name: lint-report
           path: '**/build/reports/lint-results-*'
-          
+
   get_data:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  # Use a specific version of the action
-
-      - name: Update diagram
-        uses: githubocto/repo-visualizer@main
-        with:
-          excluded_paths: "ignore,.github"
-
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.email "shankarpriyank312002@gmail.com"
-          git config --global user.name "Priyank Shankar"
-
-      # Save the diagram image as an artifact
-      - name: Save Diagram Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: diagram-artifact  # Define a name for the artifact
-          path: ./diagram.svg  # Set the correct path to your diagram.svg file
+    - name: Update diagram
+      id: make_diagram
+      uses: githubocto/repo-visualizer@0.7.1
+      with:
+        output_file: "output-diagram.svg"
+        artifact_name: "my-diagram"
+    
+    - name: Get artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: "my-diagram"
+        path: "downloads"
           
   assemble_job:
     name: Assemble
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -197,6 +177,7 @@ jobs:
         env:
           LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
         run: echo $LOCAL_PROPERTIES > ./local.properties
+
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 

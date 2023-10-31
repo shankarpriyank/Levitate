@@ -3,9 +3,9 @@ name: Android CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test_job:
@@ -26,8 +26,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
@@ -91,8 +91,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
@@ -100,7 +100,7 @@ jobs:
         run: echo $LOCAL_PROPERTIES > ./local.properties
 
       - name: Run ktlint check
-        run:  ./gradlew check   --continue
+        run: ./gradlew check --continue
 
   lint_job:
     name: Lint
@@ -120,8 +120,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
@@ -138,7 +138,7 @@ jobs:
           name: lint-report
           path: '**/build/reports/lint-results-*'
 
-get_data:
+  get_data:
     - name: Update diagram
       id: make_diagram
       uses: githubocto/repo-visualizer@0.7.1
@@ -170,8 +170,8 @@ get_data:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:

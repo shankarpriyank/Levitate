@@ -145,13 +145,13 @@ jobs:
       with:
         output_file: "output-diagram.svg"
         artifact_name: "my-diagram"
-    
+
     - name: Get artifact
       uses: actions/download-artifact@v2
       with:
         name: "my-diagram"
         path: "downloads"
-          
+
   assemble_job:
     name: Assemble
     runs-on: ubuntu-latest

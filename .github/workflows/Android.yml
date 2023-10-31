@@ -3,10 +3,9 @@ name: Android CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 
 jobs:
   test_job:
@@ -14,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -27,8 +25,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name : Grant Permission
-        run : chmod +x gradlew
+
+      - name: Grant Permission
+        run: chmod +x gradlew
+
       - name: Generate local.properties
         env:
           LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
@@ -45,7 +45,7 @@ jobs:
           path: '**/build/reports/tests/'
 
   android-app-tests:
-    name : Instrumented Tests
+    name: Instrumented Tests
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -83,7 +83,6 @@ jobs:
           name: test-reports
           path: '**/build/reports/tests/'
 
-
   code_formatting_job:
     name: Code Formatting
     runs-on: ubuntu-latest
@@ -92,8 +91,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
@@ -101,22 +100,13 @@ jobs:
         run: echo $LOCAL_PROPERTIES > ./local.properties
 
       - name: Run ktlint check
-        run:  ./gradlew check   --continue
-
-#       - name: Upload ktlint Reports
-#         if: ${{ always() }}
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: ktlint-report
-#           path: '**/build/reports/ktlint'
-
+        run: ./gradlew check --continue
 
   lint_job:
     name: Lint
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -130,8 +120,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
@@ -147,13 +137,12 @@ jobs:
         with:
           name: lint-report
           path: '**/build/reports/lint-results-*'
-
+          
   assemble_job:
     name: Assemble
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -167,13 +156,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name : Grant Permission
-        run : chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Generate local.properties
         env:
           LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
         run: echo $LOCAL_PROPERTIES > ./local.properties
+
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 

@@ -152,11 +152,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@v2  # Use a specific version of the action
+
       - name: Update diagram
         uses: githubocto/repo-visualizer@main
         with:
           excluded_paths: "ignore,.github"
+
+      # Save the diagram image as an artifact
+      - name: Save Diagram Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: diagram-artifact  # Define a name for the artifact
+          path: ./diagram.svg  # Set the correct path to your diagram.svg file
           
   assemble_job:
     name: Assemble

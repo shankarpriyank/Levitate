@@ -147,7 +147,17 @@ jobs:
         with:
           name: lint-report
           path: '**/build/reports/lint-results-*'
-
+          
+  get_data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Update diagram
+        uses: githubocto/repo-visualizer@main
+        with:
+          excluded_paths: "ignore,.github"
+          
   assemble_job:
     name: Assemble
     runs-on: ubuntu-latest

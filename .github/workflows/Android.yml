@@ -159,6 +159,11 @@ jobs:
         with:
           excluded_paths: "ignore,.github"
 
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "shankarpriyank312002@gmail.com"
+          git config --global user.name "Priyank Shankar"
+
       # Save the diagram image as an artifact
       - name: Save Diagram Artifact
         uses: actions/upload-artifact@v2

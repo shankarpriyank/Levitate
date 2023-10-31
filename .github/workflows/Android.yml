@@ -138,7 +138,7 @@ jobs:
           name: lint-report
           path: '**/build/reports/lint-results-*'
 
-  get_data:
+get_data:
     - name: Update diagram
       id: make_diagram
       uses: githubocto/repo-visualizer@0.7.1

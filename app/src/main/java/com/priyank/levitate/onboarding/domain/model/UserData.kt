@@ -3,7 +3,7 @@ package com.priyank.levitate.onboarding.domain.model
 import java.util.Date
 
 data class UserData(
-    val isUserVerified: Boolean = false,
+    val isUserVerified: Int = 0,
     val username: String? = null,
     val userId: String? = null,
     val gender: Gender? = null,

@@ -62,7 +62,7 @@ class OnboardingScreenViewModel @Inject constructor(
 
     fun uploadUserDetail() {
         val userDetails = com.priyank.levitate.onboarding.domain.model.UserData(
-            isUserVerified = false,
+            isUserVerified = 1,
             username = _name.value,
             userId = userDetails.getUserId(),
             userBday = SimpleDateFormat("dd-MM-yyyy").parse(_bday.value),
@@ -83,7 +83,7 @@ class OnboardingScreenViewModel @Inject constructor(
     suspend fun isUserVerifiied(): Boolean {
         val user = userDetails.getUserId()?.let { OnboardingDao().getUserInfo(it) }
         Log.e("GGGG", user.toString())
-        return user!!.isUserVerified
+        return true
     }
 
     fun isUserDetailsFilled(): Boolean {

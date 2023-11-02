@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.priyank.levitate.dating.presentation.DatingViewModel
+import com.priyank.levitate.dating.presentation.MatchList
 import com.priyank.levitate.dating.presentation.UserProfileScreen
 import com.priyank.levitate.onboarding.data.OnboardingDao
 import com.priyank.levitate.onboarding.domain.model.UserData
@@ -38,10 +39,8 @@ fun SetupInnerNavGraph(
             )
         }
         composable(route = Route.InnerRoute.MESSAGINGSCREEN) { entry ->
-            Text(
-                modifier = modifier,
-                text = "PG",
-            )
+            val vm = hiltViewModel<DatingViewModel>()
+            MatchList(matches = vm.users.collectAsState().value)
         }
         composable(route = Route.InnerRoute.PROFILESCREEN) { entry ->
             Text(

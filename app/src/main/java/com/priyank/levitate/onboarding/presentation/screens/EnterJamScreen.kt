@@ -108,7 +108,7 @@ fun EnterJam(
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { navHostController.navigate(Route.ENTER_LINKDIN_URL) },
+            onClick = { navHostController.navigate(Route.ADD_PHOTOS) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(

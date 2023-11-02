@@ -123,8 +123,13 @@ fun SetupNavGraph(
                     ),
                 )
             }
-            composable(route = Route.ADD_PHOTOS) {
-                AddPhotosScreen(navHostController = navController)
+            composable(route = Route.ADD_PHOTOS) { entry ->
+                AddPhotosScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.DATING) {
                 MatchingScreen()

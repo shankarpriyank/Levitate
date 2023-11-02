@@ -1,6 +1,7 @@
 package com.priyank.levitate.onboarding.presentation
 
 import android.service.autofill.UserData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.priyank.levitate.onboarding.data.OnboardingDao
 import com.priyank.levitate.onboarding.data.UserDetails
@@ -77,6 +78,20 @@ class OnboardingScreenViewModel @Inject constructor(
 
     fun updatejam(jam: String) {
         _jam.value = jam
+    }
+
+    suspend fun isUserVerifiied(): Boolean {
+        val user = userDetails.getUserId()?.let { OnboardingDao().getUserInfo(it) }
+        Log.e("GGGG", user.toString())
+        return user!!.isUserVerified
+    }
+
+    fun isUserDetailsFilled(): Boolean {
+        Log.e("IsDetailed", userDetails.getIsDetailsFilled().toString())
+        return userDetails.getIsDetailsFilled()
+    }
+    fun setUserDetailsFilled() {
+        userDetails.detailsFilled()
     }
 
     init {

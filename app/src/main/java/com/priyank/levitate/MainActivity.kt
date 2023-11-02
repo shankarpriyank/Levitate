@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.priyank.levitate.navigation.SetupNavGraph
 import com.priyank.levitate.onboarding.presentation.LoginScreenViewModel
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.LevitateTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,11 +28,13 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     val loginScreenViewModel: LoginScreenViewModel = hiltViewModel()
+                    val onboardingScreenViewModel: OnboardingScreenViewModel = hiltViewModel()
 
                     SetupNavGraph(
                         navController = navController,
                         // TODO revert back
                         startDestination = if (loginScreenViewModel.isUserLoggedIn()) "onboarding_nav_graph" else "login_nav_graph",
+                        isUserDetailsFilled = onboardingScreenViewModel.isUserDetailsFilled(),
                     )
                 }
             }

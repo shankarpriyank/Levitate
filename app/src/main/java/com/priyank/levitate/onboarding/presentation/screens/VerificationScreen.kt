@@ -7,13 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -23,10 +22,23 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.priyank.levitate.R
+import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.Lato
 
 @Composable
-fun VerificationScreen(navHostController: NavHostController) {
+fun VerificationScreen(
+    navHostController: NavHostController,
+    onboardingScreenViewModel: OnboardingScreenViewModel,
+) {
+    var isUserVerified = false
+
+    LaunchedEffect(key1 = true) {
+        isUserVerified = onboardingScreenViewModel.isUserVerifiied()
+    }
+    if (isUserVerified) {
+        navHostController.navigate(Route.DATING)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,13 +79,9 @@ fun VerificationScreen(navHostController: NavHostController) {
         LottieAnimation(
             composition = composition,
             progress = progress,
-            modifier = Modifier.fillMaxSize().padding(30.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(30.dp),
         )
     }
-}
-
-@Preview
-@Composable
-fun prev() {
-    VerificationScreen(navHostController = NavHostController(LocalContext.current))
 }

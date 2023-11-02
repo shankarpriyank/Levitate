@@ -28,6 +28,7 @@ import com.priyank.levitate.onboarding.presentation.screens.VerificationScreen
 fun SetupNavGraph(
     navController: NavHostController,
     startDestination: String,
+    isUserDetailsFilled: Boolean,
 ) {
     NavHost(
         navController = navController,
@@ -51,7 +52,10 @@ fun SetupNavGraph(
                 )
             }
         }
-        navigation(startDestination = Route.ENTER_NAME, route = "onboarding_nav_graph") {
+        navigation(
+            startDestination = if (isUserDetailsFilled) Route.DATING else Route.ENTER_NAME,
+            route = "onboarding_nav_graph",
+        ) {
             composable(route = Route.ENTER_NAME) { entry ->
                 EnterNameScreen(
                     navHostController = navController,
@@ -111,8 +115,13 @@ fun SetupNavGraph(
                     ),
                 )
             }
-            composable(route = Route.VERIFICATION_SCREEN) {
-                VerificationScreen(navHostController = navController)
+            composable(route = Route.VERIFICATION_SCREEN) { entry ->
+                VerificationScreen(
+                    navHostController = navController,
+                    onboardingScreenViewModel = entry.sharedViewModel(
+                        navController = navController,
+                    ),
+                )
             }
             composable(route = Route.ADD_PHOTOS) {
                 AddPhotosScreen(navHostController = navController)

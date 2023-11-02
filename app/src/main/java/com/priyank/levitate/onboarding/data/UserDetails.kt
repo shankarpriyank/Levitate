@@ -10,6 +10,8 @@ class UserDetails(
     fun getUserEmail() = sharedPreferences.getString("userEmail", "F")
     fun getUserName() = sharedPreferences.getString("userName", "F")
 
+    fun getIsDetailsFilled() = sharedPreferences.getBoolean("DetailsFilled", false)
+
     fun updateUser(
         id: String?,
         email: String?,
@@ -26,6 +28,10 @@ class UserDetails(
 
     fun signOut() = with(sharedPreferences.edit()) {
         putBoolean("Logged In", false)
+        apply()
+    }
+    fun detailsFilled() = with(sharedPreferences.edit()) {
+        putBoolean("DetailsFilled", true)
         apply()
     }
 }

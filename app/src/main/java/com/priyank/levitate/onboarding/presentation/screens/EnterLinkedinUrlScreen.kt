@@ -1,5 +1,6 @@
 package com.priyank.levitate.onboarding.presentation.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -124,6 +125,9 @@ fun navigateAndPostUserToDB(
     navHostController: NavHostController,
     onboardingScreenViewModel: OnboardingScreenViewModel,
 ) {
+    onboardingScreenViewModel.setUserDetailsFilled()
+    Log.e("Details gyu", "ddd")
     onboardingScreenViewModel.uploadUserDetail()
+    Log.e("Upload ho gya", "uuuu")
     navHostController.navigate(Route.VERIFICATION_SCREEN)
 }

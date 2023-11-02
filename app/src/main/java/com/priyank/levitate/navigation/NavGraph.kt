@@ -53,7 +53,7 @@ fun SetupNavGraph(
             }
         }
         navigation(
-            startDestination = if (isUserDetailsFilled) Route.DATING else Route.ENTER_NAME,
+            startDestination = if (isUserDetailsFilled) Route.VERIFICATION_SCREEN else Route.ENTER_NAME,
             route = "onboarding_nav_graph",
         ) {
             composable(route = Route.ENTER_NAME) { entry ->

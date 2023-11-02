@@ -1,13 +1,17 @@
 package com.priyank.levitate.onboarding.data
 
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.priyank.levitate.onboarding.domain.model.Gender
+import com.google.firebase.storage.ktx.storage
 import com.priyank.levitate.onboarding.domain.model.UserData
 import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class OnboardingDao {
     val database = Firebase.firestore
@@ -36,5 +40,27 @@ class OnboardingDao {
        }
 
 
+    }
+
+    suspend fun uploadImage(image: Uri): String = suspendCoroutine { continuation ->
+        if (image != null) {
+            val storageRef = Firebase.storage.reference
+            val photoref = storageRef.child("levitate/${System.currentTimeMillis()}-photo.jpg")
+
+            photoref.putFile(image)
+                .continueWithTask { photoUploadTask ->
+                    photoref.downloadUrl
+                }
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val url = task.result?.toString() ?: "Error obtaining URL"
+                        continuation.resume(url)
+                    } else {
+                        continuation.resume("Error uploading image")
+                    }
+                }
+        } else {
+            continuation.resume("Invalid image URI")
+        }
     }
 }

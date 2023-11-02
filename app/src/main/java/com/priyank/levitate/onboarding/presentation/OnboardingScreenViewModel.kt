@@ -1,14 +1,18 @@
 package com.priyank.levitate.onboarding.presentation
 
+import android.net.Uri
 import android.service.autofill.UserData
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.priyank.levitate.onboarding.data.OnboardingDao
 import com.priyank.levitate.onboarding.data.UserDetails
 import com.priyank.levitate.onboarding.domain.model.Gender
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -39,7 +43,15 @@ class OnboardingScreenViewModel @Inject constructor(
     private val _jam = MutableStateFlow("")
     val jam = _jam.asStateFlow()
 
+    val gpt = mutableListOf<Uri?>()
+
+    val imageUris = MutableStateFlow(gpt)
+    val urls = mutableListOf<String>()
+
+    val imageUrls = MutableStateFlow(urls)
+
     private var gender = Gender.MALE
+
     fun updateName(name: String) {
         _name.value = name
     }
@@ -60,6 +72,23 @@ class OnboardingScreenViewModel @Inject constructor(
         _linkedInUrl.value = linkedIn
     }
 
+    fun updateImages(images: List<Uri?>) {
+        imageUris.value = images.toMutableList()
+        uploadImages()
+    }
+
+    private fun uploadImages() {
+        viewModelScope.launch {
+            var imageurls = mutableListOf<String>()
+            delay(1000)
+            imageUris.value.forEach {
+                val gg = OnboardingDao().uploadImage(it!!)
+                imageurls.add(gg)
+            }
+            imageUrls.value = imageurls
+        }
+    }
+
     fun uploadUserDetail() {
         val userDetails = com.priyank.levitate.onboarding.domain.model.UserData(
             isUserVerified = 1,
@@ -71,6 +100,7 @@ class OnboardingScreenViewModel @Inject constructor(
             LinkedinUrl = _linkedInUrl.value,
             interests = _interests.value,
             jam = _jam.value,
+            userImagesUrl = imageUrls.value,
 
         )
         OnboardingDao().addUserInfo(userDetails)
@@ -90,6 +120,7 @@ class OnboardingScreenViewModel @Inject constructor(
         Log.e("IsDetailed", userDetails.getIsDetailsFilled().toString())
         return userDetails.getIsDetailsFilled()
     }
+
     fun setUserDetailsFilled() {
         userDetails.detailsFilled()
     }

@@ -107,7 +107,7 @@ fun EnterBdayScreen(navHostController: NavHostController, onboardingScreenViewMo
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { navHostController.navigate(Route.ENTER_GENDER) },
+            onClick = { navHostController.navigate(Route.ADD_PHOTOS) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(

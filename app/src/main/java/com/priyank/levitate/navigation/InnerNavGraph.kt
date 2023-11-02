@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.priyank.levitate.dating.presentation.Intro
 
 @Composable
 fun SetupInnerNavGraph(
@@ -19,10 +20,7 @@ fun SetupInnerNavGraph(
         startDestination = startDestination,
     ) {
         composable(route = Route.InnerRoute.HOMESCREEN) { entry ->
-            Text(
-                modifier = modifier,
-                text = "GG",
-            )
+            Intro()
         }
         composable(route = Route.InnerRoute.MESSAGINGSCREEN) { entry ->
             Text(

@@ -6,9 +6,10 @@ import com.priyank.levitate.onboarding.domain.model.UserData
 
 class OnboardingDao {
     val database = Firebase.firestore
-    val user = UserData()
 
-    fun gg() {
-        database.collection("gg").add(user)
+    fun addUserInfo(userData: UserData) {
+        database.collection("main_users_collection").add(userData)
+    }
+    fun getUserInfo(userId: String) {
     }
 }

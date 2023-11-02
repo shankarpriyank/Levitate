@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.priyank.levitate.navigation.Route
+import com.priyank.levitate.onboarding.domain.model.Gender
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
@@ -83,7 +84,7 @@ fun EnterGenderScreen(
                 modifier = Modifier.widthIn(min = 120.dp),
                 shape = RoundedCornerShape(25.dp),
                 onClick = {
-                    onboardingScreenViewModel.setGender("MAN")
+                    onboardingScreenViewModel.setGender(Gender.MALE)
                     navHostController.navigate(Route.ENTER_COMPANY)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -104,7 +105,7 @@ fun EnterGenderScreen(
                     .padding(top = 20.dp),
                 shape = RoundedCornerShape(25.dp),
                 onClick = {
-                    onboardingScreenViewModel.setGender("MAN")
+                    onboardingScreenViewModel.setGender(Gender.FEMALE)
                     navHostController.navigate(Route.ENTER_COMPANY)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),

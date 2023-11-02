@@ -62,6 +62,7 @@ fun LoginScreen(
                         email = signInResult.data?.email,
                     )
                 }
+                navHostController.navigate("onboarding_nav_graph")
             } else {
                 Log.e("GG", result.resultCode.toString())
                 Log.e("PG", result.data?.data.toString() ?: "GG")

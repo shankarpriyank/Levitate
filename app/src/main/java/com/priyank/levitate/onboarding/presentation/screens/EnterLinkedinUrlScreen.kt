@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.priyank.levitate.onboarding.data.OnboardingDao
+import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.FuturaMedium
 import com.priyank.levitate.ui.theme.Lato
@@ -33,7 +33,10 @@ import com.priyank.levitate.ui.theme.Purple
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun EnterLinkedinUrlScreen(navHostController: NavHostController, onboardingScreenViewModel: OnboardingScreenViewModel) {
+fun EnterLinkedinUrlScreen(
+    navHostController: NavHostController,
+    onboardingScreenViewModel: OnboardingScreenViewModel,
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +106,7 @@ fun EnterLinkedinUrlScreen(navHostController: NavHostController, onboardingScree
             modifier = Modifier
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(25.dp),
-            onClick = { OnboardingDao().gg() },
+            onClick = { navigateAndPostUserToDB(navHostController, onboardingScreenViewModel) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
         ) {
             Text(
@@ -115,4 +118,12 @@ fun EnterLinkedinUrlScreen(navHostController: NavHostController, onboardingScree
             )
         }
     }
+}
+
+fun navigateAndPostUserToDB(
+    navHostController: NavHostController,
+    onboardingScreenViewModel: OnboardingScreenViewModel,
+) {
+    onboardingScreenViewModel.uploadUserDetail()
+    navHostController.navigate(Route.VERIFICATION_SCREEN)
 }

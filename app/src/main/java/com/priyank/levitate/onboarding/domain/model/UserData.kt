@@ -12,4 +12,5 @@ data class UserData(
     val LinkedinUrl: String? = null,
     val interests: List<String>? = null,
     val jam: String? = null,
+    val userImagesUrl: List<String>? = null,
 )

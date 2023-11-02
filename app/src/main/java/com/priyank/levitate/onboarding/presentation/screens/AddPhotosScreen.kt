@@ -164,5 +164,5 @@ fun updatePhotoAndNavigate(
 ) {
     onboardingScreenViewModel.updateImages(list)
 
-    navHostController.navigate(Route.ENTER_LINKDIN_URL)
+    navHostController.navigate(Route.ENTER_GENDER)
 }

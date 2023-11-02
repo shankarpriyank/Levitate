@@ -26,22 +26,19 @@ import com.priyank.levitate.R
 import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.Lato
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 
 @Composable
 fun VerificationScreen(
     navHostController: NavHostController,
     onboardingScreenViewModel: OnboardingScreenViewModel,
 ) {
-    var isUserVerified =true
+    var isUserVerified = true
 
     LaunchedEffect(key1 = true) {
         isUserVerified = onboardingScreenViewModel.isUserVerifiied()
         Log.i("TAG", "VerificationScreen: $isUserVerified")
     }
     if (isUserVerified) {
-
         navHostController.navigate(Route.DATING)
     }
     Column(

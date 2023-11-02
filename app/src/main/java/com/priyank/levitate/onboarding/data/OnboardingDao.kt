@@ -5,11 +5,10 @@ import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.priyank.levitate.onboarding.domain.model.Gender
 import com.google.firebase.storage.ktx.storage
+import com.priyank.levitate.onboarding.domain.model.Gender
 import com.priyank.levitate.onboarding.domain.model.UserData
 import kotlinx.coroutines.tasks.await
-import java.text.SimpleDateFormat
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -31,29 +30,43 @@ class OnboardingDao {
         }
     }
 
+    suspend fun getAllUsers(): List<UserData> {
+        val postList = mainUserCollection.get().await().toObjects(UserData::class.java)
+
+        mainUserCollection.addSnapshotListener { snapshot, error ->
+            if (snapshot == null || error != null) {
+                Log.e("FireStore ERR", "$error")
+                return@addSnapshotListener
+            } else {
+                val postlist = snapshot.toObjects(UserData::class.java)
+                for (post in postlist) {
+                    Log.i("Info", "$post")
+                }
+            }
+        }
+
+        return postList
+    }
+
     suspend fun getUserInfo(userId: String): UserData {
-       try{
-           var user:UserData?=null
-           val userDocRef = mainUserCollection.document(userId)
-           Log.i("TAG", "getUserInfo: $userId")
-               user=userDocRef.get().await().toObject<UserData>()
-           Log.i("TAG", "getUserInfo: $user")
+        try {
+            var user: UserData? = null
+            val userDocRef = mainUserCollection.document(userId)
+            Log.i("TAG", "getUserInfo: $userId")
+            user = userDocRef.get().await().toObject<UserData>()
+            Log.i("TAG", "getUserInfo: $user")
 
-
-           return user?:throw Exception("Gadbad ho gayi")
-
-       }catch (e:Exception){
-           Log.e("Gadbad", "getUserInfo: $e")
-           throw e
-       }
-
-
+            return user ?: throw Exception("Gadbad ho gayi")
+        } catch (e: Exception) {
+            Log.e("Gadbad", "getUserInfo: $e")
+            throw e
+        }
     }
 
     suspend fun getAllFemales(): List<UserData> {
         try{
             var users:List<UserData>
-            val usersDocRef = mainUserCollection.whereEqualTo("gender",Gender.FEMALE)
+            val usersDocRef = mainUserCollection.whereEqualTo("gender", Gender.FEMALE)
             users=usersDocRef.get().await().toObjects(UserData::class.java)
             Log.i("TAG", "getAllFemales: $users")
             return users

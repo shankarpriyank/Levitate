@@ -13,4 +13,5 @@ data class UserData(
     val interests: List<String>? = null,
     val jam: String? = null,
     val userImagesUrl: List<String>? = null,
+    val companyName: String = "",
 )

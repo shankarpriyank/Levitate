@@ -101,6 +101,7 @@ class OnboardingScreenViewModel @Inject constructor(
             interests = _interests.value,
             jam = _jam.value,
             userImagesUrl = imageUrls.value,
+            companyName = _companyName.value,
 
         )
         OnboardingDao().addUserInfo(userDetails)

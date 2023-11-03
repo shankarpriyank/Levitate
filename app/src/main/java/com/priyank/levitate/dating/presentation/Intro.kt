@@ -27,7 +27,7 @@ import com.priyank.levitate.onboarding.domain.model.UserData
 fun UserProfileScreen(
     userDataList: List<UserData>,
     deleteUserById: (String) -> Unit,
-    likeId: (String, String) -> Unit,
+    likeId: (String) -> Unit,
 ) {
     var currentIndex by remember { mutableStateOf(0) }
 
@@ -38,10 +38,7 @@ fun UserProfileScreen(
 
                 UserProfile(
                     userData = userData,
-                    onLikeClick = {
-                        // Handle Like button click
-                        // You can add your logic here
-                    },
+                    onLikeClick = likeId,
                     onDislikeClick = deleteUserById,
 
                 )
@@ -51,7 +48,11 @@ fun UserProfileScreen(
 }
 
 @Composable
-fun UserProfile(userData: UserData, onLikeClick: () -> Unit, onDislikeClick: (String) -> Unit) {
+fun UserProfile(
+    userData: UserData,
+    onLikeClick: (String) -> Unit,
+    onDislikeClick: (String) -> Unit,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,7 +110,7 @@ fun UserProfile(userData: UserData, onLikeClick: () -> Unit, onDislikeClick: (St
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Button(
-                        onClick = onLikeClick,
+                        onClick = { onLikeClick(userData.userId!!) },
                         modifier = Modifier.padding(8.dp),
                     ) {
                         Text("Like")

@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.priyank.levitate.dating.presentation.DatingViewModel
 import com.priyank.levitate.dating.presentation.MatchList
 import com.priyank.levitate.dating.presentation.UserProfileScreen
@@ -25,28 +25,34 @@ fun SetupInnerNavGraph(
         navController = navController,
         startDestination = startDestination,
     ) {
-        composable(route = Route.InnerRoute.HOMESCREEN) { entry ->
-            var users = mutableListOf<UserData>()
-            val vm = hiltViewModel<DatingViewModel>()
-            LaunchedEffect(key1 = true) {
-                users = OnboardingDao().getAllUsers().toMutableList()
-            }
-            UserProfileScreen(
-                userDataList = vm.users.collectAsState().value,
-                deleteUserById = vm::deleteUserById,
-                likeId = vm::likeId,
+        navigation(startDestination = Route.InnerRoute.HOMESCREEN, route = "inner_nav_graph") {
+            composable(route = Route.InnerRoute.HOMESCREEN) { entry ->
+                var users = mutableListOf<UserData>()
+                val vm: DatingViewModel = entry.sharedViewModel(
+                    navController = navController,
+                )
+                LaunchedEffect(key1 = true) {
+                    users = OnboardingDao().getAllUsers().toMutableList()
+                }
+                UserProfileScreen(
+                    userDataList = vm.users.collectAsState().value,
+                    deleteUserById = vm::deleteUserById,
+                    likeId = vm::likeId,
 
-            )
-        }
-        composable(route = Route.InnerRoute.MESSAGINGSCREEN) { entry ->
-            val vm = hiltViewModel<DatingViewModel>()
-            MatchList(matches = vm.users.collectAsState().value)
-        }
-        composable(route = Route.InnerRoute.PROFILESCREEN) { entry ->
-            Text(
-                modifier = modifier,
-                text = "EG",
-            )
+                )
+            }
+            composable(route = Route.InnerRoute.MESSAGINGSCREEN) { entry ->
+                val vm: DatingViewModel = entry.sharedViewModel(
+                    navController = navController,
+                )
+                MatchList(matches = vm.MatchesUI.collectAsState().value, update = vm::getMatches)
+            }
+            composable(route = Route.InnerRoute.PROFILESCREEN) { entry ->
+                Text(
+                    modifier = modifier,
+                    text = "EG",
+                )
+            }
         }
     }
 }

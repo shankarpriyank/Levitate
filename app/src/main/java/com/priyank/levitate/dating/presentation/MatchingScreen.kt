@@ -46,7 +46,7 @@ fun MatchingScreen() {
         SetupInnerNavGraph(
             modifier = Modifier.padding(padding),
             navController = navControllerForBottomNav,
-            startDestination = Route.InnerRoute.HOMESCREEN,
+            startDestination = "inner_nav_graph",
         )
     }
 }

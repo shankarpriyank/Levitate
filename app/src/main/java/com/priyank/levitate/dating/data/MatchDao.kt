@@ -14,8 +14,9 @@ class MatchDao {
     val userMatchesCollection = database.collection("user_matches")
 
     suspend fun addMatch(from: String, to: String) {
-        if (checkMatch(to, from))
+        if (checkMatch(to, from)) {
             addUserMatch(from, to)
+        }
         matchesCollection.add(Match(from, to)).addOnSuccessListener {
             Log.e("addMatch", "match initiated")
         }
@@ -32,13 +33,13 @@ class MatchDao {
                 userMatchesCollection.document(to).get().await().toObject<UserMatches>()
             toUserMatches?.matches?.add(from)
             toUserMatches?.let { userMatchesCollection.document(to).set(it) }
-        }catch (e:Exception){
-            Log.e("Tag", "addUserMatch: $e", )
+        } catch (e: Exception) {
+            Log.e("Tag", "addUserMatch: $e")
             throw e
         }
     }
 
-    suspend fun getUserMatches(userId:String):UserMatches?{
+    suspend fun getUserMatches(userId: String): UserMatches? {
         val userMatches =
             userMatchesCollection.document(userId).get().await().toObject<UserMatches>()
         return userMatches
@@ -48,8 +49,8 @@ class MatchDao {
             val match = matchesCollection.where(
                 Filter.and(
                     Filter.equalTo("from", from),
-                    Filter.equalTo("to", to)
-                )
+                    Filter.equalTo("to", to),
+                ),
             ).get().await().toObjects(Match::class.java)
             Log.i("MATCH", "checkMatch: $match")
             return match.size > 0

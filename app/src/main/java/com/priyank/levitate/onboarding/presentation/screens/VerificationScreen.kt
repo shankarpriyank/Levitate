@@ -1,6 +1,5 @@
 package com.priyank.levitate.onboarding.presentation.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +25,9 @@ import com.priyank.levitate.R
 import com.priyank.levitate.navigation.Route
 import com.priyank.levitate.onboarding.presentation.OnboardingScreenViewModel
 import com.priyank.levitate.ui.theme.Lato
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun VerificationScreen(
@@ -35,12 +37,13 @@ fun VerificationScreen(
     var isUserVerified = true
 
     LaunchedEffect(key1 = true) {
-        isUserVerified = onboardingScreenViewModel.isUserVerifiied()
-        Log.i("TAG", "VerificationScreen: $isUserVerified")
+        GlobalScope.launch(Dispatchers.Main) {
+            if (onboardingScreenViewModel.isUserVerifiied()) {
+                navHostController.navigate(Route.DATING)
+            }
+        }
     }
-    if (isUserVerified) {
-        navHostController.navigate(Route.DATING)
-    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()

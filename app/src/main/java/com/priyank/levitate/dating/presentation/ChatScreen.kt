@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,9 +25,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.priyank.levitate.onboarding.domain.model.UserData
+import kotlin.reflect.KSuspendFunction0
 
 @Composable
-fun MatchList(matches: List<UserData>) {
+fun MatchList(matches: List<UserData>, update: KSuspendFunction0<Unit>) {
+    LaunchedEffect(key1 = true) {
+        update()
+    }
     LazyColumn {
         item {
             Text(

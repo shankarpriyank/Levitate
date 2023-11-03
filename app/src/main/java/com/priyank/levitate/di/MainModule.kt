@@ -20,6 +20,7 @@ object MainModule {
         val sharedPreferences = context.getSharedPreferences("accountDetails", MODE_PRIVATE)
         return UserDetails(sharedPreferences)
     }
+
     @Singleton
     @Provides
     fun provideMatchDao(): MatchDao {
